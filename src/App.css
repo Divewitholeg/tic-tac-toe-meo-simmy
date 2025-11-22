@@ -1,0 +1,302 @@
+/* App.css with YouTube Background */
+.youtube-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.youtube-background iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw; /* 16:9 aspect ratio */
+  min-height: 100vh;
+  min-width: 177.77vh; /* 16:9 aspect ratio */
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 214, 231, 0.3);
+  backdrop-filter: blur(2px);
+}
+
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-center;
+  font-family: 'Comic Sans MS', 'Marker Felt', 'Arial Rounded MT Bold', sans-serif;
+}
+
+.game-container {
+  width: 500px;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(255, 182, 217, 0.4);
+  border-right: 4px solid #ffb6d9;
+  position: relative;
+  z-index: 1;
+  margin-left: 350px;
+  opacity: 0.75;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px;
+  width: 800px;
+}
+
+.board-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.square {
+  width: 90px;
+  height: 90px;
+  background: #fff9fd;
+  border: 3px solid #ffb6d9;
+  border-radius: 20px;
+  margin: 6px;
+  font-size: 2.8em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(255, 182, 217, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.square:hover {
+  background: #fff0f7;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 16px rgba(255, 182, 217, 0.5);
+}
+
+.square:active {
+  transform: translateY(0) scale(1);
+}
+
+.square.x-marker {
+  color: #ff6b9d;
+  text-shadow: 3px 3px 6px rgba(255, 107, 157, 0.4);
+}
+
+.square.o-marker {
+  color: #6bcfff;
+  text-shadow: 3px 3px 6px rgba(107, 207, 255, 0.4);
+}
+
+.status {
+  font-size: 2.2em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 25px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 30px;
+  border: 4px dashed #ffb6d9;
+  color: #ff6b9d;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgba(255, 182, 217, 0.3);
+  width: 100%;
+}
+
+.game-info {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 25px;
+  border: 4px solid #a6e3ff;
+  box-shadow: 0 12px 24px rgba(166, 227, 255, 0.4);
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.game-info ol {
+  padding-left: 25px;
+  margin: 0;
+}
+
+.game-info li {
+  margin-bottom: 15px;
+}
+
+.game-info button {
+  background: linear-gradient(135deg, #ffb6d9, #ff9ec8);
+  border: none;
+  border-radius: 18px;
+  padding: 12px 18px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 12px rgba(255, 182, 217, 0.4);
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
+  font-size: 1.1em;
+}
+
+.game-info button:hover {
+  background: linear-gradient(135deg, #ff9ec8, #ff85b8);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(255, 182, 217, 0.6);
+}
+
+.game-info button:active {
+  transform: translateY(0);
+}
+
+.square::before {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle at 30% 30%, #ffd6e7, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.square:hover::before {
+  opacity: 0.4;
+}
+
+/* Winner celebration animation */
+@keyframes celebrate {
+  0% { 
+    transform: scale(1) rotate(0deg); 
+    background: linear-gradient(135deg, #fff9fd, #ffebf3);
+  }
+  25% { 
+    transform: scale(1.1) rotate(5deg); 
+    background: linear-gradient(135deg, #ffebf3, #ffe6f0);
+  }
+  50% { 
+    transform: scale(1.15) rotate(-5deg); 
+    background: linear-gradient(135deg, #ffe6f0, #ffe0ec);
+  }
+  75% { 
+    transform: scale(1.1) rotate(5deg); 
+    background: linear-gradient(135deg, #ffebf3, #ffe6f0);
+  }
+  100% { 
+    transform: scale(1) rotate(0deg); 
+    background: linear-gradient(135deg, #fff9fd, #ffebf3);
+  }
+}
+
+.status:contains('Winner'),
+.status[data-winner="true"] {
+  animation: celebrate 0.8s ease-in-out;
+  border: 4px solid #ff6b9d;
+  background: linear-gradient(135deg, #fff9fd, #ffebf3);
+}
+
+/* Custom scrollbar for game info */
+.game-info::-webkit-scrollbar {
+  width: 8px;
+}
+
+.game-info::-webkit-scrollbar-track {
+  background: rgba(255, 182, 217, 0.2);
+  border-radius: 10px;
+}
+
+.game-info::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ffb6d9, #ff9ec8);
+  border-radius: 10px;
+}
+
+.game-info::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ff9ec8, #ff85b8);
+}
+
+/* Responsive design */
+@media (max-width: 1440px) {
+  .game-container {
+    width: 45%;
+  }
+  
+  .square {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5em;
+  }
+  
+  .status {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 1024px) {
+  .game-container {
+    width: 50%;
+  }
+  
+  .square {
+    width: 70px;
+    height: 70px;
+    font-size: 2.2em;
+  }
+  
+  .status {
+    font-size: 1.8em;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+  
+  .game-container {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    border-right: none;
+    border-bottom: 4px solid #ffb6d9;
+  }
+  
+  .game {
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .square {
+    width: 60px;
+    height: 60px;
+    font-size: 1.8em;
+  }
+  
+  .status {
+    font-size: 1.5em;
+    padding: 15px;
+  }
+}
